@@ -10,7 +10,7 @@ and open the template in the editor.
         <title>Simple Login Page</title>
         
         <!--STYLESHEETS-->
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/cstyle.css" rel="stylesheet" type="text/css" />
         <!--SCRIPTS-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
     </head>
@@ -19,12 +19,15 @@ and open the template in the editor.
         <div id="wrapper">
             
         <!--AUTHENTICATION FORM-->
-        <form name="login-form" class="login-form" action="" method="post">
+        <form name="main-form" class="main-form" action="" method="post">
             
             <!--HEADER-->
             <div class="header">
+                <div class ="twitlogo">
+                    
+                </div>
              <!--TITLE--><h1>Get Latest Tweets</h1><!--END TITLE-->
-             <!--DESCRIPTION--><span>Please press the Twitter login icon to get started with the awesome Get Latest Tweets App!</span><!--END DESCRIPTION-->
+             <!--DESCRIPTION--><span>Please press the "Sign-in through Twitter" icon to get started with the awesome Get Latest Tweets App!</span><!--END DESCRIPTION-->
              </div>
              <!--END HEADER-->
              
