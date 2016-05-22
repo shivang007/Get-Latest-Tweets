@@ -1,2 +1,2 @@
-# Get-Latest-Tweets
-Fetches Latest Tweets of user and his friends
+# Login-Using-Twitter
+Uses Twitter OAuth authentication to authenticate user account and allow him to access the site.
