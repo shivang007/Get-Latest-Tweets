@@ -35,23 +35,28 @@ if (!isset($_SESSION['access_token'])) {
 	// getting recent tweeets by user 'Shahrukh Khan' on twitter
         $tweetsof = 'iamsrk';           
 	$tweets = $connection->get('statuses/user_timeline', ['count' => 10, 'screen_name' => $tweetsof]);
+        
 	$totalTweets[] = $tweets;
 	$page = 0;
         $count = 1;
-               
-       /* foreach ($totalTweets as $value) {
-            echo $count . ':' . $value . '<br/>';
-            $count++;
-        }
-           */ 
-            
-	// printing recent tweets on screen
-	  
-        /*
+  
+       /* 
         echo "<pre>";
         print_r($user);
-        echo "<pre>";
-        */
+        echo "<pre>";*/
+        
+        //Profile picture of dimension 48px by 48px (i.e. normal)
+        $normalurl = $user->profile_image_url;
+        //Profile picture of dimension 73px by 73px (i.e. bigger)
+        $biggerurl = str_replace("_normal","_bigger",$normalurl);
+        
+        //Profile banner 
+        $bannerurl = $user->profile_banner_url;
+        $bannerurl .= "/300x100"; //Banner of dimension 300px by 100px
+        $user_name = $user->name;
+        $user_screen = $user->screen_name;
+        
+        
 }
 
 ?>
@@ -71,16 +76,19 @@ The Home Page
     </head>
     <body>
         <div class="top_label"><br> Search Followers and Logout</div>
+        <div class="logo"></div>
         <div id="main_wrapper">
             
-            <div class="profile_box"><br> User Profile</div>
-            <div class="followers"><br> Followers </div>
-            
-            
+            <div class="profile_box">
+                <img id="banner" src="<?php echo $bannerurl; ?>" alt="Banner">
+                <img id="userimg" src="<?php echo $biggerurl; ?>" alt="Profile_Pic">
+                <h3><?php echo $user_name; ?></h3>
+                <h5><?php echo "@" . $user_screen; ?></h5>   
+            </div>
 
             <div class="container">
-                <a id="arrow-up" onclick="prev()"></a>
-                <a id="arrow-down"></a>
+                <a id="arrow_up" ></a>
+                <a id="arrow_down"></a>
 
             <div class="header">
                 <h1><?php echo $tweetsof ;?>'s Tweets:</h1>
@@ -119,7 +127,7 @@ The Home Page
             </div>
                 
             </div>
-            
+            <div class="followers"><br> Followers </div>
         </div>
         <div class="bottom-box"> Footer </div>
                
