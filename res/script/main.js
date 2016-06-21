@@ -19,7 +19,8 @@ $(function() {
     var $slideContainer = $('.slides', $slider);
     var $slides = $('.slide', $slider);
     var $slen = $slides.length;
-
+    var $arrow_up = $('#arrow_up');
+    var $arrow_down = $('#arrow_down');
     var interval;
 
     function startSlider() {
@@ -29,20 +30,48 @@ $(function() {
                     currentSlide = 1;
                     $slideContainer.css('margin-top',0);   
                 }
+               
+                
             });
         }, pause);
     }
     function pauseSlider() {
         clearInterval(interval);
     }
+    //remove arrow_up and arrow_down click events to remove those unexpected behaviors
     if($slen > 3){
         $slideContainer
             .on('mouseenter', pauseSlider)
             .on('mouseleave', startSlider);
-
-
-
+        
+        $arrow_up.click(function(){
+            $slideContainer.animate({'margin-top': '-='+height}, animationSpeed);
+            
+            if (++currentSlide === (($slen)-2)){
+                    currentSlide = 1;
+                    $slideContainer.css('margin-top',0);   
+                }
+                currentSlide++;
+        });
+        
+        $arrow_down.click(function(){
+            $slideContainer.animate({'margin-top': '+='+height}, animationSpeed);
+            currentSlide--;
+            pauseSlider();
+            
+        });
+        
+        
+        $arrow_up
+            .on('mouseenter', pauseSlider)
+            .on('mouseleave', startSlider);
+    
+        $arrow_down
+            .on('mouseenter', pauseSlider)
+            .on('mouseleave', startSlider);
+            
         startSlider();
     }
+    
     
 });
