@@ -32,7 +32,7 @@ body {
 
 .top_label{
     margin: 20px auto;
-    height: 50px;
+    height: 48px;
     width: 100%;
     background: #fff;
     border-top: 1px solid #46b3d3;
@@ -47,8 +47,15 @@ body {
    width:1000px;
    margin: auto;
    height: 174px;
-   background: url(../pics/logo.png) no-repeat;
-   
+   background: url(../pics/logo.png) no-repeat;   
+}
+
+.logo #twit1logo{
+   float: right;
+   width: 180px;
+    height: 174px;
+   background-image: url(../pics/twit1.png);
+   margin-right: 20px;
 }
 
 #main_wrapper{
@@ -58,7 +65,7 @@ body {
 
 .profile_box {
     width: 300px;
-    height: 250px;
+    height: 230px;
     word-wrap: break-word; 
     overflow: hidden;
     float: left;
@@ -97,13 +104,65 @@ body {
     word-wrap: break-word;
     font-family: 'Bree Serif', serif;
 }
-.profile_box h5{
+.profile_box span{
+    position: absolute;
+    margin-top: -20px;
     width: 195px;
     margin-left: 100px;
     word-wrap: break-word;
     font-family: 'Bree Serif', serif;
-    margin-top: -1.5em;
+    /*color: #678889;*/
+    color: #66757f;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+    font-size: 13px;
+    
+    
 }
+#ufollowers{
+    position: absolute;
+    font-family: 'Bree Serif', serif;
+    color: #66757f;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+#ufollowers #ufollowers_cnt{
+    font-size: 18px;
+    color: #9D582E; 
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+}
+#ufollowing #ufollowing_cnt{
+    font-size: 18px;
+    color: #9D582E;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+}
+#usr_tweets #usr_tweets_cnt{
+    font-size: 18px;
+    color: #9D582E;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+}
+#ufollowing{
+    position: absolute;
+    font-family: 'Bree Serif', serif;
+    color: #66757f;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+    font-size: 15px;
+    margin-left: 120px;
+    margin-top: 8px;
+    
+}
+
+#usr_tweets{
+    position: absolute;
+    font-family: 'Bree Serif', serif;
+    color: #66757f;
+    text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+    font-size: 15px;
+    margin-left: 220px;
+    margin-top: 8px;
+}
+
 
 
 .container{
