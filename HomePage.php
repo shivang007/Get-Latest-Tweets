@@ -36,7 +36,7 @@ if (!isset($_SESSION['access_token'])) {
         $tweetsof = 'iamsrk';           
 	$tweets = $connection->get('statuses/user_timeline', ['count' => 10, 'screen_name' => $tweetsof]);
         
-	$totalTweets[] = $tweets;
+	$totalTweets[] = $tweets;//10 latest tweets
 	$page = 0;
         $count = 1;
   
@@ -50,11 +50,15 @@ if (!isset($_SESSION['access_token'])) {
         //Profile picture of dimension 73px by 73px (i.e. bigger)
         $biggerurl = str_replace("_normal","_bigger",$normalurl);
         
+        
         //Profile banner 
         $bannerurl = $user->profile_banner_url;
         $bannerurl .= "/300x100"; //Banner of dimension 300px by 100px
         $user_name = $user->name;
         $user_screen = $user->screen_name;
+        $ufollowers = $user->followers_count;
+        $ufollowing = $user->friends_count;
+        $usr_tweets = $user->statuses_count; //Total no of user tweets
         
         
 }
@@ -75,15 +79,36 @@ The Home Page
         <script type="text/javascript" src="res/script/main.js"></script>
     </head>
     <body>
-        <div class="top_label"><br> Search Followers and Logout</div>
-        <div class="logo"></div>
+        <div class="top_label">Search Followers and Logout
+            <span style="border-radius: 10px; float: right; margin-right: 10px;"><img alt="logout" src="<?php echo $normalurl; ?>"></span>
+        </div>
+        <div class="logo">
+            <div id="twit1logo"></div>
+        </div>
         <div id="main_wrapper">
             
             <div class="profile_box">
                 <img id="banner" src="<?php echo $bannerurl; ?>" alt="Banner">
                 <img id="userimg" src="<?php echo $biggerurl; ?>" alt="Profile_Pic">
                 <h3><?php echo $user_name; ?></h3>
-                <h5><?php echo "@" . $user_screen; ?></h5>   
+                <span><?php echo "@" . $user_screen; ?></span>
+                <div id="ufollowers">FOLLOWERS
+                    <div id="ufollowers_cnt">
+                        <?php echo $ufollowers; ?>
+                    </div>   
+                </div>
+                
+                <div id="ufollowing">FOLLOWING
+                    <div id="ufollowing_cnt">
+                        <?php echo $ufollowing; ?>
+                    </div>        
+                </div>
+                
+                <div id="usr_tweets">TWEETS
+                    <div id="usr_tweets_cnt">
+                        <?php echo $usr_tweets; ?>
+                    </div>      
+                </div>
             </div>
 
             <div class="container">
@@ -101,7 +126,7 @@ The Home Page
                         $start = 1;
                         foreach ($totalTweets as $page) {
                             foreach ($page as $key) {
-                                echo  '<li class="slide">' . '<br>' . $start . ':' . $key->text . '</li>' ;
+                                echo  '<li class="slide">' . '<br>' . '<span style="color: #9D582E;">' . $start . '.' . '</span>' . ' ' . $key->text . '</li>' ;
                                     $start++;
                             }
                         }
@@ -113,7 +138,7 @@ The Home Page
                             $start = 1;
                             foreach ($totalTweets as $page) {
                                 foreach ($page as $key) {
-                                    echo '<li class="slide">' . '<br>' . $start . ':' . $key->text . '</li>';
+                                    echo '<li class="slide">' . '<br>' . '<span style="color: #9D582E;">' . $start . '.' . '</span>' . ' ' . $key->text . '</li>';
                                     $start++;
                                     if($start == 4){
                                         break;
