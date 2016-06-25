@@ -23,43 +23,35 @@ if (!isset($_SESSION['access_token'])) {
 	$_SESSION['oauth_token'] = $request_token['oauth_token'];
 	$_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 	$url = $connection->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
-	
 } else {
+    
         //If the session exists
 	$access_token = $_SESSION['access_token'];
 	$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-	//creating new connection
+	
         //getting basic user info
 	$user = $connection->get("account/verify_credentials");
-	
-	// getting recent tweeets by user 'Shahrukh Khan' on twitter
-        $tweetsof = 'iamsrk';           
-	$tweets = $connection->get('statuses/user_timeline', ['count' => 10, 'screen_name' => $tweetsof]);
-        
-	$totalTweets[] = $tweets;//10 latest tweets
-	$page = 0;
-        $count = 1;
-  
-       /* 
-        echo "<pre>";
-        print_r($user);
-        echo "<pre>";*/
-        
-        //Profile picture of dimension 48px by 48px (i.e. normal)
-        $normalurl = $user->profile_image_url;
-        //Profile picture of dimension 73px by 73px (i.e. bigger)
-        $biggerurl = str_replace("_normal","_bigger",$normalurl);
-        
-        
-        //Profile banner 
-        $bannerurl = $user->profile_banner_url;
-        $bannerurl .= "/300x100"; //Banner of dimension 300px by 100px
+	//Getting Basic info of user
         $user_name = $user->name;
         $user_screen = $user->screen_name;
         $ufollowers = $user->followers_count;
         $ufollowing = $user->friends_count;
         $usr_tweets = $user->statuses_count; //Total no of user tweets
-        
+        //Profile picture of dimension 48px by 48px (i.e. normal)
+        $normalurl = $user->profile_image_url;
+        //Profile picture of dimension 73px by 73px (i.e. bigger)
+        $biggerurl = str_replace("_normal","_bigger",$normalurl);
+        //Profile banner 
+        $bannerurl = $user->profile_banner_url;
+        $bannerurl .= "/300x100"; //Banner of dimension 300px by 100px
+              
+             
+	// getting recent tweeets by user 'Shahrukh Khan' on twitter
+        $tweetsof = 'iamsrk';           
+	$tweets = $connection->get('statuses/user_timeline', ['count' => 10, 'screen_name' => $tweetsof]);
+	$totalTweets[] = $tweets;//10 latest tweets
+	$page = 0;
+                
         
 }
 
@@ -79,8 +71,9 @@ The Home Page
         <script type="text/javascript" src="res/script/main.js"></script>
     </head>
     <body>
-        <div class="top_label">Search Followers and Logout
-            <span style="border-radius: 10px; float: right; margin-right: 10px;"><img alt="logout" src="<?php echo $normalurl; ?>"></span>
+        <div class="top_label">
+            <img id="logoutimg" alt="logout" src="<?php echo $normalurl; ?>">
+            <input type="text" id="search_box" placeholder="Search Followers">
         </div>
         <div class="logo">
             <div id="twit1logo"></div>
@@ -110,7 +103,7 @@ The Home Page
                     </div>      
                 </div>
             </div>
-
+            <div id="twit2logo"></div>
             <div class="container">
                 <a id="arrow_up" ></a>
                 <a id="arrow_down"></a>
