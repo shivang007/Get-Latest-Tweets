@@ -44,15 +44,31 @@ if (!isset($_SESSION['access_token'])) {
         //Profile banner 
         $bannerurl = $user->profile_banner_url;
         $bannerurl .= "/300x100"; //Banner of dimension 300px by 100px
-              
-             
+        
+        
+        //Getting Followers of User
+        $usrfollowers = $connection->get('followers/list', ['count' => $ufollowers, 'screen_name' => $user_screen, 'skip_status' => True]);
+        $page = 0;
+        $start = 0;        
+        foreach ($usrfollowers as $page){
+            if (is_array($page) || is_object($page)){
+                foreach ($page as $key){
+                    $myfollowers[$start] = $key->name;
+                    $start++;
+                }
+            }
+        }
+     
+        for($i=0;$i<$start;$i++){
+           echo $myfollowers[$i] . '<br>';
+        }
+        
+
 	// getting recent tweeets by user 'Shahrukh Khan' on twitter
-        $tweetsof = 'iamsrk';           
+        $tweetsof = 'iamsrk';            
 	$tweets = $connection->get('statuses/user_timeline', ['count' => 10, 'screen_name' => $tweetsof]);
 	$totalTweets[] = $tweets;//10 latest tweets
-	$page = 0;
-                
-        
+      
 }
 
 ?>
