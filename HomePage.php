@@ -50,19 +50,25 @@ if (!isset($_SESSION['access_token'])) {
         $usrfollowers = $connection->get('followers/list', ['count' => $ufollowers, 'screen_name' => $user_screen, 'skip_status' => True]);
         $page = 0;
         $start = 0;        
-        foreach ($usrfollowers as $page){
+        /*foreach ($usrfollowers as $page){
             if (is_array($page) || is_object($page)){
                 foreach ($page as $key){
                     $myfollowers[$start] = $key->name;
                     $start++;
                 }
             }
+        }*/
+     	
+     	foreach ($usrfollowers as $page){
+            if (is_array($page) || is_object($page)){
+                foreach ($page as $key){
+                    $myfollowers[$key->name] = $key->screen_name;
+                    //Storing Followers' Names as key and their Screen_names as value
+                    $start++;
+                }
+            }
         }
-     
-        for($i=0;$i<$start;$i++){
-           echo $myfollowers[$i] . '<br>';
-        }
-        
+
 
 	// getting recent tweeets by user 'Shahrukh Khan' on twitter
         $tweetsof = 'iamsrk';            
